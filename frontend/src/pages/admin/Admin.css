@@ -1,0 +1,318 @@
+/* ═══════════════════════════════════════════════════════════
+   RESTAURANT PARTNER PORTAL — Warm Dark / Eatzo Orange
+   ═══════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; }
+
+.rp-app {
+  font-family: 'Inter', sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ── Partner Login ───────────────────────────────────────── */
+.rp-login-page {
+  width: 100%; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: #0f0f0f;
+  position: relative; overflow: hidden;
+}
+.rp-login-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 0%,   rgba(255,107,53,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(233,30,99,0.08)  0%, transparent 60%);
+  pointer-events: none;
+}
+.rp-login-card {
+  position: relative; z-index: 1;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 20px; padding: 48px;
+  width: 100%; max-width: 440px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+.rp-login-logo { text-align: center; margin-bottom: 36px; }
+.rp-login-logo .rp-store-icon { font-size: 3.2rem; display: block; margin-bottom: 12px; }
+.rp-login-logo h1 {
+  font-size: 1.6rem; font-weight: 800;
+  background: linear-gradient(135deg, #FF6B35, #E91E63);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin: 0 0 6px;
+}
+.rp-login-logo p { color: #888; font-size: 0.88rem; margin: 0; }
+
+.rp-field { margin-bottom: 18px; }
+.rp-field label { display: block; font-size: 0.82rem; font-weight: 600; color: #888; margin-bottom: 6px; }
+.rp-field select, .rp-field input {
+  width: 100%; padding: 13px 14px;
+  background: #111; border: 1px solid #2a2a2a;
+  border-radius: 10px; color: #f0f0f0; font-size: 0.92rem;
+  transition: border-color 0.2s;
+}
+.rp-field select:focus, .rp-field input:focus { outline: none; border-color: #FF6B35; }
+.rp-field select option { background: #1a1a1a; }
+
+.rp-login-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #FF6B35, #E91E63);
+  border: none; border-radius: 10px; color: #fff;
+  font-weight: 800; font-size: 0.95rem; cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s; margin-top: 8px;
+}
+.rp-login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.rp-login-btn:disabled { opacity: 0.5; transform: none; }
+.rp-demo-hint { text-align: center; margin-top: 18px; font-size: 0.78rem; color: #666; }
+
+/* ── Dashboard Shell ────────────────────────────────────── */
+.rp-sidebar {
+  width: 270px; min-height: 100vh;
+  background: #141414;
+  border-right: 1px solid #222;
+  display: flex; flex-direction: column;
+  flex-shrink: 0;
+}
+.rp-sidebar-brand {
+  padding: 22px 20px;
+  border-bottom: 1px solid #222;
+  display: flex; align-items: center; gap: 12px;
+}
+.rp-brand-icon {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, #FF6B35, #E91E63);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.rp-sidebar-brand h2 { font-size: 0.95rem; font-weight: 700; margin: 0; color: #f0f0f0; }
+.rp-sidebar-brand p  { font-size: 0.72rem; color: #888; margin: 2px 0 0; }
+
+/* Restaurant info + open/close */
+.rp-res-info { padding: 18px 20px; border-bottom: 1px solid #222; }
+.rp-res-img  { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; }
+.rp-res-name { font-size: 1rem; font-weight: 800; margin: 0 0 4px; }
+.rp-res-addr { font-size: 0.75rem; color: #888; margin: 0 0 14px; }
+.rp-status-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #1f1f1f; border: 1px solid #2a2a2a;
+  padding: 10px 14px; border-radius: 10px;
+}
+.rp-status-label { font-size: 0.82rem; font-weight: 600; }
+/* CSS toggle switch */
+.rp-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.rp-switch input { opacity: 0; width: 0; height: 0; }
+.rp-slider {
+  position: absolute; cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #444; transition: .3s; border-radius: 24px;
+}
+.rp-slider:before {
+  position: absolute; content: '';
+  height: 18px; width: 18px; left: 3px; bottom: 3px;
+  background: white; transition: .3s; border-radius: 50%;
+}
+.rp-switch input:checked + .rp-slider { background: linear-gradient(135deg, #FF6B35, #E91E63); }
+.rp-switch input:checked + .rp-slider:before { transform: translateX(20px); }
+
+/* Nav */
+.rp-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+.rp-nav-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; border-radius: 10px;
+  background: transparent; border: none;
+  color: #888; font-size: 0.88rem; font-weight: 500;
+  cursor: pointer; transition: all 0.18s; text-align: left; width: 100%;
+}
+.rp-nav-btn:hover { background: #1f1f1f; color: #f0f0f0; }
+.rp-nav-btn.rp-active { background: rgba(255,107,53,0.12); color: #FF6B35; font-weight: 700; }
+.rp-nav-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+.rp-nav-badge {
+  margin-left: auto;
+  background: #FF6B35; color: #fff;
+  font-size: 0.65rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px; min-width: 22px; text-align: center;
+  animation: rp-pulse 1.5s ease infinite;
+}
+@keyframes rp-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(255,107,53,0); }
+}
+
+.rp-sidebar-footer {
+  padding: 16px 12px; border-top: 1px solid #222;
+}
+.rp-logout-btn {
+  width: 100%; padding: 10px 14px; border-radius: 10px;
+  background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.2);
+  color: #f85149; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 8px;
+}
+.rp-logout-btn:hover { background: rgba(248,81,73,0.15); }
+
+/* ── Main Content ───────────────────────────────────────── */
+.rp-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.rp-topbar {
+  padding: 20px 32px; border-bottom: 1px solid #222;
+  background: #141414;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.rp-topbar h2 { font-size: 1.1rem; font-weight: 800; margin: 0; }
+.rp-live-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3);
+  color: #f85149; font-size: 0.68rem; font-weight: 800;
+  padding: 3px 10px; border-radius: 20px;
+}
+.rp-live-dot { width: 7px; height: 7px; background: #f85149; border-radius: 50%; animation: rp-blink 1s ease infinite; }
+@keyframes rp-blink { 0%,100%{opacity:1;} 50%{opacity:0.1;} }
+
+.rp-content { padding: 28px 32px; flex: 1; overflow-y: auto; }
+
+/* ── Order Cards ────────────────────────────────────────── */
+.rp-orders-col-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.rp-orders-col {
+  background: #1a1a1a; border: 1px solid #222;
+  border-radius: 14px; padding: 20px;
+}
+.rp-col-title {
+  font-size: 0.9rem; font-weight: 700;
+  border-bottom: 1px solid #2a2a2a; padding-bottom: 12px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.rp-empty { text-align: center; padding: 40px 20px; color: #555; font-size: 0.88rem; }
+
+.rp-order-card {
+  background: #111; border: 1px solid #2a2a2a;
+  border-radius: 12px; padding: 16px; margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.rp-order-card.rp-new-order { border-color: rgba(255,107,53,0.5); box-shadow: 0 0 20px rgba(255,107,53,0.08); }
+.rp-order-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.rp-order-id { font-weight: 800; color: #FF6B35; font-size: 0.9rem; }
+.rp-order-time { color: #666; font-size: 0.75rem; }
+.rp-order-items { font-size: 0.84rem; color: #ccc; margin-bottom: 10px; line-height: 1.6; }
+.rp-order-addr { font-size: 0.75rem; color: #777; margin-bottom: 10px; }
+.rp-order-total { font-weight: 800; font-size: 1rem; color: #f0f0f0; border-top: 1px dashed #333; padding-top: 10px; }
+.rp-order-phone { font-size: 0.78rem; color: #888; margin-top: 4px; }
+.rp-order-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+.rp-btn-accept  { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; color: #fff; background: linear-gradient(135deg, #FF6B35, #E91E63); font-size: 0.84rem; transition: opacity 0.2s; }
+.rp-btn-accept:hover { opacity: 0.88; }
+.rp-btn-prepare { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; color: #fff; background: #FF9800; font-size: 0.84rem; }
+.rp-btn-ready   { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; color: #fff; background: #4CAF50; font-size: 0.84rem; }
+.rp-btn-cancel  { padding: 10px 14px; border: 1px solid rgba(248,81,73,0.3); border-radius: 8px; font-weight: 700; cursor: pointer; color: #f85149; background: rgba(248,81,73,0.08); font-size: 0.82rem; }
+
+/* Status badge in orders */
+.rp-status-badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 700;
+}
+.rp-status-badge.placed           { background: rgba(255,193,7,0.12);  color:#ffc107; }
+.rp-status-badge.confirmed        { background: rgba(255,107,53,0.12); color:#FF6B35; }
+.rp-status-badge.preparing        { background: rgba(255,152,0,0.12);  color:#ff9800; }
+.rp-status-badge.ready_for_pickup { background: rgba(76,175,80,0.12);  color:#4caf50; }
+.rp-status-badge.out_for_delivery { background: rgba(156,39,176,0.12); color:#ce93d8; }
+.rp-status-badge.delivered        { background: rgba(76,175,80,0.12);  color:#81c784; }
+.rp-status-badge.cancelled        { background: rgba(248,81,73,0.12);  color:#f85149; }
+
+/* ── Menu Manager ───────────────────────────────────────── */
+.rp-menu-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.rp-btn-add-item {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #FF6B35, #E91E63);
+  border: none; border-radius: 10px; color: #fff;
+  font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: opacity 0.2s;
+}
+.rp-btn-add-item:hover { opacity: 0.88; }
+
+.rp-menu-form {
+  background: #1a1a1a; border: 1px solid #2a2a2a;
+  border-radius: 14px; padding: 24px; margin-bottom: 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.rp-menu-form .rp-field { margin: 0; }
+.rp-menu-form .rp-field.full { grid-column: 1 / -1; }
+.rp-menu-form input,
+.rp-menu-form textarea,
+.rp-menu-form select {
+  width: 100%; padding: 11px 13px;
+  background: #111; border: 1px solid #2a2a2a;
+  border-radius: 8px; color: #f0f0f0; font-size: 0.88rem;
+}
+.rp-menu-form textarea { resize: vertical; min-height: 80px; }
+.rp-form-actions { grid-column: 1/-1; display: flex; gap: 10px; justify-content: flex-end; }
+.rp-btn-save   { padding: 10px 24px; background: #4CAF50; border: none; border-radius: 8px; color: #fff; font-weight: 700; cursor: pointer; }
+.rp-btn-cancel-form { padding: 10px 24px; background: transparent; border: 1px solid #444; border-radius: 8px; color: #888; font-weight: 600; cursor: pointer; }
+
+.rp-menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.rp-menu-card {
+  background: #1a1a1a; border: 1px solid #2a2a2a;
+  border-radius: 14px; overflow: hidden;
+  transition: transform 0.18s, border-color 0.18s;
+}
+.rp-menu-card:hover { transform: translateY(-2px); border-color: #FF6B35; }
+.rp-menu-card img { width: 100%; height: 140px; object-fit: cover; }
+.rp-menu-card-body { padding: 14px; }
+.rp-menu-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.rp-veg-dot   { width: 10px; height: 10px; border-radius: 50%; background: #4CAF50; }
+.rp-nonveg-dot{ width: 10px; height: 10px; border-radius: 50%; background: #f44336; }
+.rp-menu-price { font-weight: 800; color: #FF6B35; font-size: 1rem; }
+.rp-menu-name  { font-weight: 700; font-size: 0.92rem; margin: 0 0 4px; }
+.rp-menu-cat   { font-size: 0.72rem; background: #222; color: #aaa; padding: 3px 8px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+.rp-menu-desc  { font-size: 0.78rem; color: #777; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.rp-menu-actions { display: flex; gap: 8px; }
+.rp-btn-edit   { flex: 1; padding: 7px; background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.3); color: #FF6B35; border-radius: 7px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+.rp-btn-delete { flex: 1; padding: 7px; background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.25); color: #f85149; border-radius: 7px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+
+/* ── Order History Table ────────────────────────────────── */
+.rp-table-wrap { background: #1a1a1a; border: 1px solid #222; border-radius: 14px; overflow: hidden; }
+.rp-table-header { padding: 16px 20px; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; }
+.rp-table-header h3 { font-size: 0.95rem; font-weight: 700; margin: 0; }
+.rp-search { padding: 8px 14px; background: #111; border: 1px solid #2a2a2a; border-radius: 8px; color: #f0f0f0; font-size: 0.84rem; width: 220px; }
+.rp-search:focus { outline: none; border-color: #FF6B35; }
+.rp-table { width: 100%; border-collapse: collapse; }
+.rp-table th { padding: 12px 18px; text-align: left; font-size: 0.73rem; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #222; background: #111; }
+.rp-table td { padding: 12px 18px; font-size: 0.84rem; border-bottom: 1px solid #1f1f1f; vertical-align: middle; }
+.rp-table tr:last-child td { border-bottom: none; }
+.rp-table tr:hover td { background: rgba(255,107,53,0.04); }
+
+/* ── Settings ───────────────────────────────────────────── */
+.rp-settings-card { background: #1a1a1a; border: 1px solid #222; border-radius: 14px; padding: 28px; max-width: 640px; }
+.rp-settings-card h3 { font-size: 1rem; font-weight: 800; margin: 0 0 24px; }
+.rp-settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rp-settings-grid .rp-field { margin: 0; }
+.rp-settings-grid .rp-field.full { grid-column: 1/-1; }
+.rp-settings-grid input, .rp-settings-grid textarea {
+  width: 100%; padding: 11px 13px;
+  background: #111; border: 1px solid #2a2a2a;
+  border-radius: 8px; color: #f0f0f0; font-size: 0.88rem;
+}
+.rp-settings-grid input:focus, .rp-settings-grid textarea:focus { outline: none; border-color: #FF6B35; }
+.rp-settings-actions { margin-top: 24px; display: flex; gap: 12px; }
+.rp-btn-save-settings {
+  padding: 11px 28px;
+  background: linear-gradient(135deg, #FF6B35, #E91E63);
+  border: none; border-radius: 10px; color: #fff;
+  font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+}
+.rp-btn-save-settings:hover { opacity: 0.88; }
+.rp-saved-msg { color: #4CAF50; font-size: 0.84rem; display: flex; align-items: center; gap: 6px; }
+
+/* ── Stat row ───────────────────────────────────────────── */
+.rp-stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.rp-stat-card { background: #1a1a1a; border: 1px solid #222; border-radius: 12px; padding: 16px; }
+.rp-stat-card .rp-stat-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.rp-stat-card .rp-stat-val  { font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+.rp-stat-card .rp-stat-lbl  { font-size: 0.75rem; color: #888; }
+
+@media (max-width: 900px) {
+  .rp-orders-col-wrap { grid-template-columns: 1fr; }
+  .rp-menu-form { grid-template-columns: 1fr; }
+  .rp-settings-grid { grid-template-columns: 1fr; }
+  .rp-sidebar { width: 220px; }
+  .rp-content { padding: 18px; }
+}

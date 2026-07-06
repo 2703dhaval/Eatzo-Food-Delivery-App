@@ -1,0 +1,227 @@
+.order-success-page { padding: 90px 0 60px; }
+
+.success-banner {
+  text-align: center;
+  padding: 48px 20px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(233,30,99,0.08));
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+}
+.success-animation {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: bounce 1s ease infinite alternate;
+}
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12px); }
+}
+.success-banner h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), #E91E63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.success-banner p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
+.eta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,193,7,0.1);
+  border: 1px solid rgba(255,193,7,0.3);
+  color: var(--secondary);
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 0.88rem;
+}
+
+/* Tracking */
+.tracking-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.tracking-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 28px; }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  opacity: 0.4;
+  transition: all 0.5s ease;
+}
+.timeline-step.completed { opacity: 1; }
+.timeline-step.active { opacity: 1; }
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.step-icon-circle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background: var(--bg-card2);
+  transition: all 0.5s ease;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.timeline-step.completed .step-icon-circle {
+  border-color: var(--primary);
+  background: rgba(255,107,53,0.1);
+}
+.timeline-step.active .step-icon-circle {
+  border-color: var(--primary);
+  background: rgba(255,107,53,0.15);
+  box-shadow: 0 0 0 4px rgba(255,107,53,0.15);
+  animation: pulse-ring 2s ease infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255,107,53,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+}
+.step-num { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+
+.step-connector {
+  width: 2px;
+  height: 40px;
+  background: var(--border);
+  margin: 4px 0;
+  transition: background 0.5s ease;
+}
+.step-connector.filled { background: var(--primary); }
+
+.step-content {
+  padding: 10px 0 20px;
+  position: relative;
+}
+.step-content h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; }
+.step-content p { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Order Detail Card */
+.order-detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.order-detail-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+.order-items-list { margin-bottom: 16px; }
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.order-address {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Live badge next to tracking title */
+.tracking-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,75,75,0.12);
+  border: 1px solid rgba(255,75,75,0.35);
+  color: #ff4b4b;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 40px;
+}
+.live-dot {
+  width: 7px; height: 7px;
+  background: #ff4b4b;
+  border-radius: 50%;
+  animation: live-blink 1s ease infinite;
+}
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.1; }
+}
+
+/* Polling note at bottom of timeline */
+.polling-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 16px;
+  opacity: 0.7;
+}
+
+/* Cancelled state banner */
+.cancelled-banner {
+  background: linear-gradient(135deg, rgba(255,75,75,0.08), rgba(200,0,0,0.08));
+  border-color: rgba(255,75,75,0.25);
+}
+
+/* Active pulse dot under active step label */
+.active-pulse {
+  width: 8px; height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-top: 6px;
+  animation: live-blink 1s ease infinite;
+}
+
+/* Green chip shown when delivered */
+.completed-chip {
+  display: inline-block;
+  background: rgba(76,175,80,0.15);
+  border: 1px solid rgba(76,175,80,0.4);
+  color: #4caf50;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+
+/* Actions */
+.success-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

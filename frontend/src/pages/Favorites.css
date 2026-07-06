@@ -1,0 +1,81 @@
+.favorites-page { padding: 90px 0 60px; }
+
+.fav-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+/* Empty State */
+.fav-empty {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.fav-empty-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: heartBeat 2s ease infinite;
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.2); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.1); }
+  80% { transform: scale(1); }
+}
+.fav-empty h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 10px; }
+.fav-empty > p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 32px; }
+
+.fav-empty-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.fav-feature {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 110px;
+}
+.fav-feature span { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+.fav-feature p { font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; }
+.fav-feature-arrow { font-size: 1.2rem; color: var(--text-muted); }
+
+/* Promo Banner */
+.fav-promo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(233,30,99,0.08));
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  font-size: 1.8rem;
+}
+.fav-promo strong { display: block; font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+.fav-promo p { font-size: 0.82rem; color: var(--text-secondary); }
+.code-chip {
+  background: rgba(255,107,53,0.15);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 24px;
+}

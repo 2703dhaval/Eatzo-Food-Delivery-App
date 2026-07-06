@@ -1,0 +1,77 @@
+.orders-page { padding: 90px 0 60px; }
+
+.orders-login-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-prompt-content { text-align: center; padding: 60px 20px; }
+.login-prompt-content h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+.login-prompt-content p { color: var(--text-secondary); }
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.order-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  transition: var(--transition);
+}
+.order-card:hover { border-color: rgba(255,107,53,0.2); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.order-restaurant { font-size: 1.05rem; font-weight: 700; margin-bottom: 3px; }
+.order-id { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+
+.order-status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.order-items-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.order-item-tag {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.order-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.reorder-btn, .track-btn {
+  padding: 8px 18px !important;
+  font-size: 0.82rem !important;
+}

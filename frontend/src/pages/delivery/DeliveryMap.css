@@ -1,0 +1,47 @@
+.dp-map-wrapper {
+  width: calc(100% - 28px);
+  margin: 14px 14px 0;
+  height: 250px;
+  background: #111;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--dp-border);
+}
+
+.sa-div-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid #fff;
+  background: #1c1c1c;
+}
+
+.sa-restaurant-marker {
+  border-color: var(--dp-teal);
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+}
+
+.sa-customer-marker {
+  border-color: var(--dp-green);
+  box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+}
+
+/* Custom leaflet tooltip styling */
+.leaflet-popup-content-wrapper {
+  background: var(--dp-card) !important;
+  color: var(--dp-text) !important;
+  border: 1px solid var(--dp-border) !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--dp-card) !important;
+}
