@@ -133,7 +133,7 @@ export default function Cart() {
         restaurantId: cartRestaurant.id,
         restaurantName: cartRestaurant.name,
         items: cartItems.map(i => ({ name: i.name, price: i.price, qty: i.qty })),
-        total,
+        total: total + Math.round(subtotal * 0.05), // total includes taxes
         address: fullAddress,
         addressLabel,
         receiverName,
@@ -142,20 +142,113 @@ export default function Cart() {
         lat: orderLat,
         lng: orderLng,
       };
+      
       const res = await api.placeOrder(orderPayload);
-      if (res.success) {
+      if (!res.success) {
+        alert('Order failed: ' + res.message);
+        setPlacing(false);
+        return;
+      }
+
+      // If Cash on Delivery, place order and redirect immediately
+      if (paymentMethod === 'cod') {
         clearCart();
         setShowConfirmation(false);
         setReceiverName('');
         setReceiverPhone('');
         setHouseNumber('');
         navigate(`/order-success/${res.data.id}`);
-      } else {
-        alert('Order failed: ' + res.message);
+        return;
       }
+
+      // If Razorpay payment method
+      if (!res.razorpayOrder) {
+        alert('Failed to initialize digital payment gateway. Try Cash on Delivery.');
+        setPlacing(false);
+        return;
+      }
+
+      const options = {
+        key: res.razorpayOrder.key,
+        amount: res.razorpayOrder.amount,
+        currency: res.razorpayOrder.currency,
+        name: "Eatzo Food Delivery",
+        description: `Order #${res.data.id} from ${res.data.restaurantName}`,
+        image: "/eatzo-logo.jpg",
+        order_id: res.razorpayOrder.id,
+        handler: async function (response) {
+          try {
+            setPlacing(true);
+            const verifyRes = await api.verifyPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              orderId: res.data.id
+            });
+
+            if (verifyRes.success) {
+              clearCart();
+              setShowConfirmation(false);
+              setReceiverName('');
+              setReceiverPhone('');
+              setHouseNumber('');
+              navigate(`/order-success/${res.data.id}`);
+            } else {
+              alert("Payment Verification Failed: " + verifyRes.message);
+            }
+          } catch (err) {
+            console.error("Signature verification error:", err);
+            alert("Error verifying payment signature. Please contact support.");
+          } finally {
+            setPlacing(false);
+          }
+        },
+        prefill: {
+          name: receiverName,
+          contact: receiverPhone,
+          email: user.email || "customer@eatzo.com"
+        },
+        theme: {
+          color: "#fc8019"
+        },
+        modal: {
+          ondismiss: async function () {
+            console.log("Razorpay checkout dismissed");
+            try {
+              await api.reportPaymentFailure({
+                orderId: res.data.id,
+                errorDescription: "Payment cancelled by user",
+                errorCode: "USER_CANCELLED"
+              });
+            } catch (err) {
+              console.error("Failed to cancel order status:", err);
+            }
+            alert("Payment cancelled. The order has not been completed.");
+            setPlacing(false);
+          }
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', async function (response) {
+        console.error("Payment failed event:", response.error);
+        try {
+          await api.reportPaymentFailure({
+            orderId: res.data.id,
+            errorDescription: response.error.description,
+            errorCode: response.error.code
+          });
+        } catch (err) {
+          console.error("Failed to report payment failure:", err);
+        }
+        alert(`Payment Failed: ${response.error.description || 'Transaction failed'}`);
+        setPlacing(false);
+      });
+      rzp.open();
+
     } catch (e) {
+      console.error(e);
       alert('Something went wrong. Please try again.');
-    } finally {
       setPlacing(false);
     }
   };

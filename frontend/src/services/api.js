@@ -1,6 +1,6 @@
-// const BASE_URL = 'http://localhost:5000/api';
-
-const BASE_URL = 'https://eatzo-food-delivery-app.onrender.com/api';
+const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:5000/api'
+  : 'https://eatzo-food-delivery-app.onrender.com/api';
 
 export const api = {
   async getRestaurants(params = {}) {
@@ -46,4 +46,22 @@ export const api = {
     });
     return res.json();
   },
+
+  async verifyPayment(paymentData) {
+    const res = await fetch(`${BASE_URL}/payments/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(paymentData),
+    });
+    return res.json();
+  },
+
+  async reportPaymentFailure(failureData) {
+    const res = await fetch(`${BASE_URL}/payments/failure`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(failureData),
+    });
+    return res.json();
+  }
 };
