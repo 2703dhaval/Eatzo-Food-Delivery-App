@@ -89,7 +89,7 @@ const connectDB = async () => {
       console.error(`3. Click 'Allow Access From Anywhere' (0.0.0.0/0) and save.`);
       console.error(`4. Alternatively, make sure MongoDB is running locally.`);
       console.error(`======================================================\n`);
-      process.exit(1);
+      console.warn(`⚠️ Keeping backend server running to prevent Render container crashes. Database calls will fail until connected.`);
     }
   }
 };
