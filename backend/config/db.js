@@ -61,7 +61,7 @@ const seedDatabase = async () => {
 };
 
 const connectDB = async () => {
-  const primaryUri = process.env.MONGODB_URI;
+  const primaryUri = process.env.MONGODB_URI || 'mongodb+srv://eatzo-food:admin@cluster0.r7igck6.mongodb.net/eatzo?retryWrites=true&w=majority';
   const fallbackUri = 'mongodb://127.0.0.1:27017/eatzo';
 
   try {
