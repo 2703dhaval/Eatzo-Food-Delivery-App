@@ -1,4 +1,6 @@
-const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = 'http://localhost:5000/api';
+
+const BASE_URL = 'https://eatzo-food-delivery-app.onrender.com/api';
 
 export const api = {
   async getRestaurants(params = {}) {
